@@ -1,67 +1,54 @@
-// JavaScript Document
-
-/*
-
-TemplateMo 600 Prism Flux
-
-https://templatemo.com/tm-600-prism-flux
-
-*/
-
-
-// Portfolio data for carousel
-
-        const portfolioData = [
-            {
-                id: 1,
-                title: 'Neural Network',
-                description: 'Advanced AI system with deep learning capabilities for predictive analytics and pattern recognition.',
-                image: 'images/neural-network.jpg',
-                tech: ['TensorFlow', 'Python', 'CUDA']
-            },
-            {
-                id: 2,
-                title: 'Quantum Cloud',
-                description: 'Next-generation cloud infrastructure leveraging quantum computing for unprecedented processing power.',
-                image: 'images/quantum-cloud.jpg',
-                tech: ['AWS', 'Kubernetes', 'Docker']
-            },
-            {
-                id: 3,
-                title: 'Blockchain Vault',
-                description: 'Secure decentralized storage solution using advanced encryption and distributed ledger technology.',
-                image: 'images/blockchain-vault.jpg',
-                tech: ['Ethereum', 'Solidity', 'Web3']
-            },
-            {
-                id: 4,
-                title: 'Cyber Defense',
-                description: 'Military-grade cybersecurity framework with real-time threat detection and automated response.',
-                image: 'images/cyber-defense.jpg',
-                tech: ['Zero Trust', 'AI Defense', 'Encryption']
-            },
-            {
-                id: 5,
-                title: 'Data Nexus',
-                description: 'Big data processing platform capable of analyzing petabytes of information in real-time.',
-                image: 'images/data-nexus.jpg',
-                tech: ['Apache Spark', 'Hadoop', 'Kafka']
-            },
-            {
-                id: 6,
-                title: 'AR Interface',
-                description: 'Augmented reality system for immersive data visualization and interactive experiences.',
-                image: 'images/ar-interface.jpg',
-                tech: ['Unity', 'ARCore', 'Computer Vision']
-            },
-            {
-                id: 7,
-                title: 'IoT Matrix',
-                description: 'Intelligent IoT ecosystem connecting millions of devices with edge computing capabilities.',
-                image: 'images/iot-matrix.jpg',
-                tech: ['MQTT', 'Edge AI', '5G']
-            }
-        ];
+const portfolioData = [
+    {
+        id: 1,
+        title: 'Matematika',
+        description: 'Eksplorasi logika angka, perhitungan presisi, dan penyelesaian masalah kompleks secara terstruktur.',
+        image: 'images/blockchain-vault.jpg',
+        tech: ['Aljabar', 'Logika', 'Statistik']
+    },
+    {
+        id: 2,
+        title: 'IPA',
+        description: 'Mempelajari fenomena alam, makhluk hidup, dan hukum fisika yang membentuk alam semesta.',
+        image: 'images/cyber-defense.jpg',
+        tech: ['Biologi', 'Fisika', 'Kimia']
+    },
+    {
+        id: 3,
+        title: 'IPS',
+        description: 'Memahami dinamika sosial, sejarah, dan interaksi antarmanusia dalam lingkungan masyarakat.',
+        image: 'images/neural-network.jpg',
+        tech: ['Sejarah', 'Geografi', 'Ekonomi']
+    },
+    {
+        id: 4,
+        title: 'Informatika',
+        description: 'Penguasaan teknologi digital, logika pemrograman, dan sistem informasi di era modern.',
+        image: 'images/ar-interface.jpg',
+        tech: ['Coding', 'Data', 'Hardware']
+    },
+    {
+        id: 5,
+        title: 'B. Inggris',
+        description: 'Pengembangan kemampuan komunikasi global melalui penguasaan tata bahasa dan kosakata internasional.',
+        image: 'images/data-nexus.jpg',
+        tech: ['Grammar', 'Speaking', 'Writing']
+    },
+    {
+        id: 6,
+        title: 'Penjas',
+        description: 'Menjaga kebugaran jasmani, kesehatan tubuh, dan semangat sportivitas melalui olahraga.',
+        image: 'images/iot-matrix.jpg',
+        tech: ['Atletik', 'Kesehatan', 'Sport']
+    },
+    {
+        id: 7,
+        title: 'Agama',
+        description: 'Pembentukan karakter, nilai spiritual, dan etika moral dalam kehidupan sehari-hari.',
+        image: 'images/quantum-cloud.jpg',
+        tech: ['Etika', 'Moral', 'Spiritual']
+    }
+];
 
         // Skills data
         const skillsData = [
