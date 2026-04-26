@@ -102,7 +102,6 @@ class AIAssistantLoginForm {
         
         this.setLoading(true);
         try {
-            // Simulasi loading 2 detik
             await new Promise(resolve => setTimeout(resolve, 2000));
             this.showNeuralSuccess();
         } catch (error) {
@@ -117,8 +116,8 @@ class AIAssistantLoginForm {
         button.style.opacity = '0.7';
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
-            // Redirect langsung untuk social login
-            window.location.replace("../../website2"); 
+            // Redirect langsung menggunakan path relatif yang benar
+            window.location.href = "../index.html"; 
         } catch (error) {
             button.style.pointerEvents = 'auto';
             button.style.opacity = '1';
@@ -130,27 +129,31 @@ class AIAssistantLoginForm {
         this.submitButton.disabled = loading;
     }
     
-  showNeuralSuccess() {
-        // Efek transisi keluar
+    showNeuralSuccess() {
         this.form.style.transform = 'scale(0.95)';
         this.form.style.opacity = '0';
         
         setTimeout(() => {
             this.form.style.display = 'none';
-            if(document.querySelector('.neural-social')) document.querySelector('.neural-social').style.display = 'none';
-            if(document.querySelector('.signup-section')) document.querySelector('.signup-section').style.display = 'none';
-            if(document.querySelector('.auth-separator')) document.querySelector('.auth-separator').style.display = 'none';
-            
+            const targets = ['.neural-social', '.signup-section', '.auth-separator'];
+            targets.forEach(selector => {
+                const el = document.querySelector(selector);
+                if(el) el.style.display = 'none';
+            });
             this.successMessage.classList.add('show');
         }, 300);
         
-        // Redirect otomatis
+        // REDIRECT POINT
         setTimeout(() => {
-            // CARA PALING AMAN UNTUK GITHUB PAGES:
-            // Ini akan langsung mengarahkan ke halaman depan domain kamu (astegar-coder.github.io)
-            window.location.href = window.location.origin + "/"; 
+            /* Karena file login kamu ada di DALAM sebuah folder 
+               dan index.html ada di LUAR folder tersebut (sejajar dengan foldernya), 
+               maka gunakan "../index.html".
+            */
+            window.location.href = "../index.html";
         }, 3200);
     }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     new AIAssistantLoginForm();
 });
