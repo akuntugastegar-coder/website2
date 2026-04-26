@@ -130,36 +130,27 @@ class AIAssistantLoginForm {
         this.submitButton.disabled = loading;
     }
     
-    showNeuralSuccess() {
-        // 1. Efek Visual Sembunyi Form
+  showNeuralSuccess() {
+        // Efek transisi keluar
+        this.form.style.transform = 'scale(0.95)';
         this.form.style.opacity = '0';
+        
         setTimeout(() => {
             this.form.style.display = 'none';
             if(document.querySelector('.neural-social')) document.querySelector('.neural-social').style.display = 'none';
             if(document.querySelector('.signup-section')) document.querySelector('.signup-section').style.display = 'none';
             if(document.querySelector('.auth-separator')) document.querySelector('.auth-separator').style.display = 'none';
             
-            // 2. Tampilkan Pesan Sukses
             this.successMessage.classList.add('show');
         }, 300);
         
-        // 3. PROSES REDIRECT (Bagian Paling Penting)
+        // Redirect otomatis
         setTimeout(() => {
-            console.log('Mengalihkan...');
-            /* Gunakan window.location.replace agar user tidak bisa klik 'back' ke halaman login lagi.
-               Jika file login kamu ada di folder dalam (misal: assets/login/index.html), 
-               maka butuh "../../index.html" untuk kembali ke root.
-            */
-            window.location.replace("../../index.html"); 
-            
-            // Backup jika replace gagal, gunakan href
-            setTimeout(() => {
-                window.location.href = "../../index.html";
-            }, 500);
-        }, 3000);
+            // CARA PALING AMAN UNTUK GITHUB PAGES:
+            // Ini akan langsung mengarahkan ke halaman depan domain kamu (astegar-coder.github.io)
+            window.location.href = window.location.origin + "/"; 
+        }, 3200);
     }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     new AIAssistantLoginForm();
 });
