@@ -118,7 +118,7 @@ class AIAssistantLoginForm {
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
             // Redirect langsung untuk social login
-            window.location.replace("../../index.html"); 
+            window.location.replace("../../website2"); 
         } catch (error) {
             button.style.pointerEvents = 'auto';
             button.style.opacity = '1';
