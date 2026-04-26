@@ -50,22 +50,21 @@ const portfolioData = [
     }
 ];
 
-        // Skills data
-        const skillsData = [
-            { name: 'React.js', icon: '⚛️', level: 95, category: 'frontend' },
-            { name: 'Node.js', icon: '🟢', level: 90, category: 'backend' },
-            { name: 'TypeScript', icon: '📘', level: 88, category: 'frontend' },
-            { name: 'AWS', icon: '☁️', level: 92, category: 'cloud' },
-            { name: 'Docker', icon: '🐳', level: 85, category: 'cloud' },
-            { name: 'Python', icon: '🐍', level: 93, category: 'backend' },
-            { name: 'Kubernetes', icon: '☸️', level: 82, category: 'cloud' },
-            { name: 'GraphQL', icon: '◈', level: 87, category: 'backend' },
-            { name: 'TensorFlow', icon: '🤖', level: 78, category: 'emerging' },
-            { name: 'Blockchain', icon: '🔗', level: 75, category: 'emerging' },
-            { name: 'Vue.js', icon: '💚', level: 85, category: 'frontend' },
-            { name: 'MongoDB', icon: '🍃', level: 90, category: 'backend' }
-        ];
-
+      // Skills data
+const skillsData = [
+    { name: 'Matematika', icon: '📐', level: 95, category: 'frontend' },
+    { name: 'Ekonomi', icon: '📈', level: 92, category: 'backend' },
+    { name: 'Kimia', icon: '🧪', level: 88, category: 'frontend' },
+    { name: 'Sosiologi', icon: '🤝', level: 90, category: 'backend' },
+    { name: 'Informatika', icon: '💻', level: 94, category: 'emerging' },
+    { name: 'Geografi', icon: '🌍', level: 85, category: 'backend' },
+    { name: 'B. Inggris', icon: '🇬🇧', level: 92, category: 'cloud' },
+    { name: 'Fisika', icon: '⚛️', level: 86, category: 'frontend' },
+    { name: 'B. Indonesia', icon: '🇮🇩', level: 95, category: 'cloud' },
+    { name: 'Biologi', icon: '🧬', level: 89, category: 'frontend' },
+    { name: 'Sejarah', icon: '📜', level: 87, category: 'backend' },
+    { name: 'Olahraga', icon: '⚽', level: 96, category: 'emerging' }
+];
         // Scroll to section function
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
