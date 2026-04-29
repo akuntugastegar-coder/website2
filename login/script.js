@@ -65,20 +65,25 @@ class AIAssistantLoginForm {
         }
     }
     
-    validateEmail() {
-        const email = this.emailInput.value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email) { this.showError('email', 'Email siswa wajib diisi'); return false; }
-        if (!emailRegex.test(email)) { this.showError('email', 'Format email tidak valid'); return false; }
-        this.clearError('email'); return true;
+   validateEmail() {
+    const username = this.emailInput.value.trim(); // Sekarang fungsinya jadi username
+    if (!username) { 
+        this.showError('email', 'Username wajib diisi'); 
+        return false; 
     }
+    this.clearError('email'); 
+    return true;
+}
     
-    validatePassword() {
-        const password = this.passwordInput.value;
-        if (!password) { this.showError('password', 'Kata sandi diperlukan'); return false; }
-        if (password.length < 6) { this.showError('password', 'Minimal 6 karakter'); return false; }
-        this.clearError('password'); return true;
+  validatePassword() {
+    const password = this.passwordInput.value;
+    if (!password) { 
+        this.showError('password', 'Kata sandi diperlukan'); 
+        return false; 
     }
+    this.clearError('password'); 
+    return true;
+}
     
     showError(field, message) {
         const smartField = document.getElementById(field).closest('.smart-field');
