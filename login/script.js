@@ -118,6 +118,11 @@ class AIAssistantLoginForm {
         
         this.setLoading(true);
         try {
+            const inputtedUsername = this.emailInput.value.trim();
+            // Simpan nama tersebut ke dalam sessionStorage browser
+            sessionStorage.setItem('loggedInUser', inputtedUsername);
+            sessionStorage.setItem('isLoggedIn', 'true');
+
             await new Promise(resolve => setTimeout(resolve, 2000));
             this.showNeuralSuccess();
         } catch (error) {
