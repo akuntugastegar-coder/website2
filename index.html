@@ -320,21 +320,23 @@ https://templatemo.com/tm-600-prism-flux
 <script src="templatemo-prism-scripts.js"></script>
 <script>
     function goLogin() {
-        // Fungsi untuk menangani tombol saat diklik (bisa Masuk atau Logout)
         const authButton = document.querySelector('#authArea button');
         
         if (authButton && authButton.textContent === 'LOGOUT') {
-            // JIKA STATUSNYA LOGOUT: Kembalikan tampilan ke awal
+            // JIKA LOGOUT: Hapus semua data sesi di browser
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('loggedInUser');
+            
+            // Kembalikan tampilan navbar ke default awal
             const userInfo = document.getElementById('userInfo');
             if (userInfo) userInfo.textContent = 'Belum login';
             
             authButton.textContent = 'Masuk';
-            authButton.style.background = '#6366f1'; // Balik ke warna ungu semula
-            
-            // Hapus status di session storage agar saat direfresh tidak login lagi
-            sessionStorage.removeItem('isLoggedIn');
+            authButton.style.background = '#6366f1';
+            authButton.style.color = '#ffffff';
+            authButton.style.border = 'none';
+            authButton.style.boxShadow = '0 0 12px rgba(99, 102, 241, 0.4)';
         } else {
-            // JIKA STATUSNYA MASUK: Lempar ke halaman login
             window.location.href = "login/index.html";
         }
     }
@@ -343,22 +345,24 @@ https://templatemo.com/tm-600-prism-flux
         const userInfo = document.getElementById('userInfo');
         const authButton = document.querySelector('#authArea button');
         
-        // 1. Cek apakah dia baru datang dari halaman login ATAU sudah punya sesi aktif
-        if (document.referrer.includes('login') || sessionStorage.getItem('isLoggedIn') === 'true') {
+        // Cek apakah ada status login aktif di browser
+        if (sessionStorage.getItem('isLoggedIn') === 'true' || document.referrer.includes('login')) {
             
-            // Simpan status login di browser supaya kalau halaman direfresh tidak hilang
+            // Ambil username yang tadi disimpan saat login. Jika kosong/tidak ada, gunakan cadangan 'Siswa'
+            let activeUser = sessionStorage.getItem('loggedInUser') || 'Siswa';
+            
+            // Pastikan status login tersimpan agar saat halaman direfresh data tidak hilang
             sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('loggedInUser', activeUser);
             
             if (userInfo) {
-                // Sesuai contoh LKPD: "Halo, heri"
-                userInfo.innerHTML = 'Halo, <span style="color: #6366f1; font-weight: bold;">heri</span>';
+                // SEKARANG DINAMIS: Menampilkan nama sesuai usn yang diinputkan pengguna!
+                userInfo.innerHTML = `Halo, <span style="color: #6366f1; font-weight: bold;">${activeUser}</span>`;
             }
             
             if (authButton) {
-                // Mengubah teks tombol Masuk menjadi LOGOUT sesuai instruksi LKPD
+                // Mengubah tombol menjadi LOGOUT sesuai LKPD
                 authButton.textContent = 'LOGOUT';
-                
-                // Opsional: Mengubah desain tombol sedikit biar mirip contoh LKPD (putih bersih)
                 authButton.style.background = '#ffffff';
                 authButton.style.color = '#1e1b4b';
                 authButton.style.border = '1px solid #1e1b4b';
