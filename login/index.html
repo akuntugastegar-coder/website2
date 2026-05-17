@@ -38,16 +38,17 @@
             </div>
             
             <form class="login-form" id="loginForm" novalidate>
-               <div class="smart-field" data-field="username"> <div class="field-background"></div>
-    
-    <input type="text" id="email" name="email" required autocomplete="off">
-    
-    <label for="email">Username</label> <div class="ai-indicator">
-        <div class="ai-pulse"></div>
-    </div>
-    <div class="field-completion"></div>
-    <span class="error-message" id="emailError"></span>
-</div>
+                
+                <div class="smart-field" data-field="username"> 
+                    <div class="field-background"></div>
+                    <input type="text" id="username" name="username" required autocomplete="off">
+                    <label for="username">Username</label> 
+                    <div class="ai-indicator">
+                        <div class="ai-pulse"></div>
+                    </div>
+                    <div class="field-completion"></div>
+                    <span class="error-message" id="emailError"></span>
+                </div>
 
                 <div class="smart-field" data-field="password">
                     <div class="field-background"></div>
@@ -81,6 +82,8 @@
                     </label>
                     <a href="#" class="neural-link">Reset akses</a>
                 </div>
+
+                <div id="alertBox" class="alert" style="display:none;"></div>
 
                 <button type="submit" class="neural-button">
                     <div class="button-bg"></div>
@@ -149,5 +152,6 @@
 
     <script src="../../shared/js/form-utils.js"></script>
     <script src="script.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>
