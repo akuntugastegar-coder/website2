@@ -318,10 +318,24 @@ https://templatemo.com/tm-600-prism-flux
 </footer>
 
 <script src="templatemo-prism-scripts.js"></script>
-    <script>
+<script>
     function goLogin() {
         window.location.href = "login/index.html";
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const userInfo = document.getElementById('userInfo');
+        const authArea = document.getElementById('authArea');
+        
+        if (document.referrer.includes('login')) {
+            if (userInfo) {
+                // Mengubah tulisan "Belum login" menjadi nama user
+                userInfo.innerHTML = 'Masuk: <strong style="color: #6366f1;">heri</strong>';
+            }
+            if (authArea) {
+                authArea.style.display = 'none';
+            }
+        }
+    });
 </script>
 </body>
-</html>
