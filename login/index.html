@@ -37,17 +37,17 @@
                 <p>Terhubung dengan sistem informasi akademik terpadu</p>
             </div>
             
-            <form class="login-form" id="loginForm" novalidate>
-               <div class="smart-field" data-field="username"> <div class="field-background"></div>
-    
-    <input type="text" id="email" name="email" required autocomplete="off">
-    
-    <label for="email">Username</label> <div class="ai-indicator">
-        <div class="ai-pulse"></div>
-    </div>
-    <div class="field-completion"></div>
-    <span class="error-message" id="emailError"></span>
-</div>
+            <form class="login-form" id="loginForm" onsubmit="cekLogin(event)" novalidate>
+                <div class="smart-field" data-field="username"> 
+                    <div class="field-background"></div>
+                    <input type="text" id="username" name="username" required autocomplete="off">
+                    <label for="username">Username</label> 
+                    <div class="ai-indicator">
+                        <div class="ai-pulse"></div>
+                    </div>
+                    <div class="field-completion"></div>
+                    <span class="error-message" id="emailError"></span>
+                </div>
 
                 <div class="smart-field" data-field="password">
                     <div class="field-background"></div>
@@ -149,5 +149,32 @@
 
     <script src="../../shared/js/form-utils.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        function cekLogin(event) {
+            event.preventDefault();
+
+            const userInp = document.getElementById("username").value;
+            const passInp = document.getElementById("password").value;
+
+            if (userInp === "admin" && passInp === "admin") {
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("username", "Admin");
+                localStorage.setItem("role", "admin");
+                
+                alert("Login Admin Berhasil!");
+                window.location.href = "../admin/index.html"; 
+            } else if (userInp === "heri" && passInp === "heri") {
+                localStorage.setItem("isLoggedIn", "true");
+                localStorage.setItem("username", "Heri");
+                localStorage.setItem("role", "user");
+
+                alert("Login Berhasil!");
+                window.location.href = "../index.html"; 
+            } else {
+                alert("Username atau Password salah! (Gunakan akun: admin/admin atau heri/heri)");
+            }
+        }
+    </script>
 </body>
 </html>
