@@ -2,7 +2,7 @@
 class AIAssistantLoginForm {
     constructor() {
         this.form = document.getElementById('loginForm');
-        this.emailInput = document.getElementById('email');
+        this.emailInput = document.getElementById('username'); // DIUBAH: dari 'email' ke 'username'
         this.passwordInput = document.getElementById('password');
         this.passwordToggle = document.getElementById('passwordToggle');
         this.submitButton = this.form.querySelector('.neural-button');
@@ -23,7 +23,7 @@ class AIAssistantLoginForm {
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
         this.emailInput.addEventListener('blur', () => this.validateEmail());
         this.passwordInput.addEventListener('blur', () => this.validatePassword());
-        this.emailInput.addEventListener('input', () => this.clearError('email'));
+        this.emailInput.addEventListener('input', () => this.clearError('username')); // DIUBAH: ke 'username'
         this.passwordInput.addEventListener('input', () => this.clearError('password'));
         
         this.emailInput.setAttribute('placeholder', ' ');
@@ -49,13 +49,16 @@ class AIAssistantLoginForm {
     
     setupAIEffects() {
         [this.emailInput, this.passwordInput].forEach(input => {
-            input.addEventListener('focus', (e) => {
-                this.triggerNeuralEffect(e.target.closest('.smart-field'));
-            });
+            if(input) { // Proteksi tambahan agar tidak crash
+                input.addEventListener('focus', (e) => {
+                    this.triggerNeuralEffect(e.target.closest('.smart-field'));
+                });
+            }
         });
     }
     
     triggerNeuralEffect(field) {
+        if(!field) return;
         const indicator = field.querySelector('.ai-indicator');
         if(indicator) {
             indicator.style.opacity = '1';
@@ -65,40 +68,48 @@ class AIAssistantLoginForm {
         }
     }
     
-   validateEmail() {
-    const username = this.emailInput.value.trim(); // Sekarang fungsinya jadi username
-    if (!username) { 
-        this.showError('email', 'Username wajib diisi'); 
-        return false; 
+    validateEmail() {
+        const username = this.emailInput.value.trim();
+        if (!username) { 
+            this.showError('username', 'Username wajib diisi'); // DIUBAH: ke 'username'
+            return false; 
+        }
+        this.clearError('username'); // DIUBAH: ke 'username'
+        return true;
     }
-    this.clearError('email'); 
-    return true;
-}
     
-  validatePassword() {
-    const password = this.passwordInput.value;
-    if (!password) { 
-        this.showError('password', 'Kata sandi diperlukan'); 
-        return false; 
+    validatePassword() {
+        const password = this.passwordInput.value;
+        if (!password) { 
+            this.showError('password', 'Kata sandi diperlukan'); 
+            return false; 
+        }
+        this.clearError('password'); 
+        return true;
     }
-    this.clearError('password'); 
-    return true;
-}
     
     showError(field, message) {
-        const smartField = document.getElementById(field).closest('.smart-field');
-        const errorElement = document.getElementById(`${field}Error`);
-        smartField.classList.add('error');
-        errorElement.textContent = message;
-        errorElement.classList.add('show');
+        const element = document.getElementById(field);
+        if(!element) return;
+        const smartField = element.closest('.smart-field');
+        const errorElement = document.getElementById(`emailError`); // Disamakan dengan span id di HTML kamu
+        if(smartField) smartField.classList.add('error');
+        if(errorElement) {
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        }
     }
     
     clearError(field) {
-        const smartField = document.getElementById(field).closest('.smart-field');
-        const errorElement = document.getElementById(`${field}Error`);
-        smartField.classList.remove('error');
-        errorElement.classList.remove('show');
-        setTimeout(() => { errorElement.textContent = ''; }, 200);
+        const element = document.getElementById(field);
+        if(!element) return;
+        const smartField = element.closest('.smart-field');
+        const errorElement = document.getElementById(`emailError`);
+        if(smartField) smartField.classList.remove('error');
+        if(errorElement) {
+            errorElement.classList.remove('show');
+            setTimeout(() => { errorElement.textContent = ''; }, 200);
+        }
     }
     
     async handleSubmit(e) {
@@ -121,7 +132,6 @@ class AIAssistantLoginForm {
         button.style.opacity = '0.7';
         try {
             await new Promise(resolve => setTimeout(resolve, 1500));
-            // Redirect langsung menggunakan path relatif yang benar
             window.location.href = "../index.html"; 
         } catch (error) {
             button.style.pointerEvents = 'auto';
@@ -130,8 +140,10 @@ class AIAssistantLoginForm {
     }
     
     setLoading(loading) {
-        this.submitButton.classList.toggle('loading', loading);
-        this.submitButton.disabled = loading;
+        if(this.submitButton) {
+            this.submitButton.classList.toggle('loading', loading);
+            this.submitButton.disabled = loading;
+        }
     }
     
     showNeuralSuccess() {
@@ -145,15 +157,10 @@ class AIAssistantLoginForm {
                 const el = document.querySelector(selector);
                 if(el) el.style.display = 'none';
             });
-            this.successMessage.classList.add('show');
+            if(this.successMessage) this.successMessage.classList.add('show');
         }, 300);
         
-        // REDIRECT POINT
         setTimeout(() => {
-            /* Karena file login kamu ada di DALAM sebuah folder 
-               dan index.html ada di LUAR folder tersebut (sejajar dengan foldernya), 
-               maka gunakan "../index.html".
-            */
             window.location.href = "../index.html";
         }, 3200);
     }
