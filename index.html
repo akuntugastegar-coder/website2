@@ -337,7 +337,8 @@ https://templatemo.com/tm-600-prism-flux
             authButton.style.border = 'none';
             authButton.style.boxShadow = '0 0 12px rgba(99, 102, 241, 0.4)';
         } else {
-            window.location.href = "login/index.html";
+            // DIUBAH: Mengarah ke file login.html di dalam folder admin baru Anda
+            window.location.href = "admin/login.html";
         }
     }
 
@@ -345,23 +346,26 @@ https://templatemo.com/tm-600-prism-flux
         const userInfo = document.getElementById('userInfo');
         const authButton = document.querySelector('#authArea button');
         
-        // Cek apakah ada status login aktif di browser
-        if (sessionStorage.getItem('isLoggedIn') === 'true' || document.referrer.includes('login')) {
-            
-            // Ambil username yang tadi disimpan saat login. Jika kosong/tidak ada, gunakan cadangan 'Siswa'
-            let activeUser = sessionStorage.getItem('loggedInUser') || 'Siswa';
-            
-            // Pastikan status login tersimpan agar saat halaman direfresh data tidak hilang
-            sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('loggedInUser', activeUser);
-            
+        // Mengambil status login dan username dari sessionStorage
+        let isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        let activeUser = sessionStorage.getItem('loggedInUser');
+        
+        // PENGAMAN HAK AKSES: Jika yang login adalah 'Admin', dia tidak boleh melihat halaman ini (Beranda Siswa)
+        // Dia harus dipaksa tetap berada di dalam dashboard adminnya sendiri
+        if (isLoggedIn && activeUser && activeUser.toLowerCase() === 'admin') {
+            window.location.href = "admin/index.html";
+            return; // Hentikan script agar halaman beranda tidak sempat dimuat
+        }
+        
+        // Cek jika yang login adalah siswa aktif
+        if (isLoggedIn && activeUser) {
             if (userInfo) {
-                // SEKARANG DINAMIS: Menampilkan nama sesuai usn yang diinputkan pengguna!
+                // Menampilkan nama siswa secara dinamis sesuai input login
                 userInfo.innerHTML = `Halo, <span style="color: #6366f1; font-weight: bold;">${activeUser}</span>`;
             }
             
             if (authButton) {
-                // Mengubah tombol menjadi LOGOUT sesuai LKPD
+                // Mengubah tombol menjadi LOGOUT sesuai instruksi LKPD
                 authButton.textContent = 'LOGOUT';
                 authButton.style.background = '#ffffff';
                 authButton.style.color = '#1e1b4b';
