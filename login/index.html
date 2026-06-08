@@ -153,5 +153,29 @@
     <script src="../../shared/js/form-utils.js"></script>
     <script src="script.js"></script>
     <script src="js/login.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            // Kita beri delay 1 detik (1000ms) agar efek loading animasi template kamu selesai dulu
+            setTimeout(function() {
+                const usernameInput = document.getElementById('username').value.trim();
+                
+                // Cek jika yang dimasukkan adalah username khusus admin
+                if (usernameInput.toLowerCase() === 'admin') {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('loggedInUser', 'Admin');
+                    
+                    // Keluar dari folder login (../), lalu masuk ke folder admin
+                    window.location.href = "../admin/index.html";
+                } else if (usernameInput !== "") {
+                    // Jika siswa biasa yang login
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('loggedInUser', usernameInput);
+                    
+                    // Keluar dari folder login, balik ke Beranda utama
+                    window.location.href = "../index.html";
+                }
+            }, 1000); 
+        });
+    </script>
 </body>
 </html>
